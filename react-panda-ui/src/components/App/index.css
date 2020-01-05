@@ -1,0 +1,19 @@
+.App {
+  height: 100vh;
+}
+
+.FormGroup {
+  width: 220px;
+  height: 200px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.TextField {
+  padding: 20px;
+  background-color: white;
+}
+
+.Button {
+
+}
