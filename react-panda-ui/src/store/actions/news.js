@@ -1,5 +1,6 @@
 import actionTypes from './../actionTypes';
 import axios from 'axios';
+import fetch from 'node-fetch';
 import { apiURL } from '../../.config';
 
 require('dotenv').config();
@@ -11,12 +12,12 @@ export function fetchNews() {
   return dispatch => {
     dispatch(fetchNewsRequest());
 
-    axios.get(apiURL + '/news/getFeeds?nocache=' + new Date().getTime())
+    // axios.get(apiURL + '/news/getFeeds?nocache=' + new Date().getTime())
+    fetch(apiURL + '/news/getFeeds')
+      .then(resp => resp.json())
       .then(resp => {
-        const serialized = resp.data.map((item => {
-            
-        }))
-        return dispatch(fetchNewsSuccess(resp.data));
+        console.log(resp)
+        return dispatch(fetchNewsSuccess(resp));
       })
       .catch(error => {
         return dispatch(fetchNewsFailure(error.message));
