@@ -12,12 +12,9 @@ export function fetchNews() {
   return dispatch => {
     dispatch(fetchNewsRequest());
 
-    // axios.get(apiURL + '/news/getFeeds?nocache=' + new Date().getTime())
-    fetch(apiURL + '/news/getFeeds')
-      .then(resp => resp.json())
+    axios.get(apiURL + '/news/getFeeds')
       .then(resp => {
-        console.log(resp)
-        return dispatch(fetchNewsSuccess(resp));
+        return dispatch(fetchNewsSuccess(resp.data));
       })
       .catch(error => {
         return dispatch(fetchNewsFailure(error.message));
