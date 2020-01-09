@@ -11,7 +11,7 @@ export function fetchNews() {
   return dispatch => {
     dispatch(fetchNewsRequest());
 
-    axios.get(apiURL + '/news/getFeeds')
+    axios.get(apiURL + '/news/getFeeds?nocache=' + new Date().getTime())
       .then(resp => {
         const serialized = resp.data.map((item => {
             
