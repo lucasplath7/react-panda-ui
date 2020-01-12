@@ -1,20 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
-  Button,
   CircularProgress,
-  FormControl,
-  FormGroup,
   InputLabel,
   MenuItem,
   OutlinedInput,
   Select,
-  TextField,
 } from '@material-ui/core';
 
 import Chart from './chart';
 
 import './index.css';
-import Typography from 'material-ui/styles/typography';
 
 export default function FDIC(props) {
   useEffect(() => {
@@ -36,9 +31,7 @@ export default function FDIC(props) {
   })
 
   // const initialState = {
-  //   selectedPeriodDate: null,
   // };
-
   // const [ state, setState ] = useState(initialState);
 
   function handleSelectPeriodDate(event) {
@@ -65,6 +58,14 @@ export default function FDIC(props) {
   }
   
   function renderSelectPeriodDate() {
+    if (props.data.fetchingDates) {
+      return (
+        <div className="SelectContainer">
+          <CircularProgress/>
+        </div>
+      )
+    }
+
     return props.data.periodDates ?
       <div className="SelectContainer" style={{marginTop: '50px'}}>
         <InputLabel style={{color: 'white'}}>Select Period Date</InputLabel>
@@ -89,6 +90,7 @@ export default function FDIC(props) {
         </div>
       )
     }
+
     return props.data.filers ?
       <div className="SelectContainer">
         <InputLabel style={{color: 'white'}}>Select Filer ID</InputLabel>
@@ -114,6 +116,7 @@ export default function FDIC(props) {
         </div>
       )
     }
+    
     return props.data.callReportData ?
       <Chart
         props={props}

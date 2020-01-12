@@ -1,28 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import {
-  Button,
-  FormControl,
-  FormGroup,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from '@material-ui/core';
+import React from 'react';
 
 import './index.css';
 
 export default function Home(props) {
-//   useEffect(() => {
-    
-//   })
+  // useEffect(() => {
+  // })
 
   // const initialState = {
-  //   
   // };
 
   // const [ state, setState ] = useState(initialState);
-
-  
 
   return (
     <div class={'HomePlaceholder'}>

@@ -2,17 +2,10 @@ import React, { useEffect, useState } from 'react';
 import {
   Button,
   CircularProgress,
-  FormControl,
-  FormGroup,
   InputLabel,
-  MenuItem,
-  Select,
   Slider,
-  TextField,
 } from '@material-ui/core';
-import SpeedReader from 'react-speed-reader';
 import ReactSpritz from 'react-spritz';
-
 
 import './index.css';
 import 'react-spritz/build/main.css';
@@ -69,18 +62,12 @@ export default function News(props) {
     if (value === 0) type = 'FAR-LEFT';
     if (value === 1) type = 'LEGIT';
     if (value === 2) type = 'FAR-RIGHT';
+    
     setState({
       ...state,
       index: 0,
       type: type,
     })
-  }
-
-  function valuetext(value) {
-    console.log('value: ', value)
-    if (value === 0) return 'FAR-LEFT';
-    if (value === 1) return 'ACTUAL-NEWS';
-    if (value === 2) return 'FAR-RIGHT';
   }
 
   return (
@@ -94,7 +81,6 @@ export default function News(props) {
         <Slider
           className="Slider"
           defaultValue={1}
-          // getAriaValueText={valuetext}
           aria-labelledby="discrete-slider"
           onChange={handleChange}
           valueLabelDisplay="off"

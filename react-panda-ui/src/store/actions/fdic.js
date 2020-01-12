@@ -121,7 +121,6 @@ export function fetchCallReportsFailure(error) {
 };
 
 export function fetchCallReportsSuccess(callReportData) {
-  console.log('call report data: ', callReportData)
   return {
     data: callReportData,
     type: actionTypes.FETCH_CALL_REPORTS_SUCCESS,

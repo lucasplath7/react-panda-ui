@@ -1,26 +1,20 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
-  Button,
-  CircularProgress,
-  FormControl,
-  FormGroup,
   InputLabel,
   MenuItem,
   OutlinedInput,
   Select,
-  TextField,
 } from '@material-ui/core';
-import LineChart from 'react-linechart';
 import { Line } from 'react-chartjs-2';
-import * as d3 from 'd3';
+
 
 import './index.css';
 
 export default function Chart(props) {
-  console.log('PROPS: ', props)
-  useEffect(() => {
+
+  // useEffect(() => {
    
-  })
+  // })
 
   const initialState = {
     selectedFieldOne: null,
@@ -39,7 +33,7 @@ export default function Chart(props) {
         }
         if (props.callReportData[year.id][fieldKey] < -20000 || props.callReportData[year.id][fieldKey] > 20000) inRange = false;
       });
-      if(existsForAllDates && isNumber && containsNonZero && inRange) return fieldKey;
+      if (existsForAllDates && isNumber && containsNonZero && inRange) return fieldKey;
     }).filter(value => value)
   };
 
