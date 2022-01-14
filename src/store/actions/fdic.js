@@ -1,8 +1,21 @@
 import actionTypes from './../actionTypes';
 import axios from 'axios';
+import axiosRetry from 'axios-retry';
 import { apiURL } from '../../.config';
 
 require('dotenv').config();
+
+axiosRetry(axios, {
+  retries: 50, // number of retries
+  retryDelay: (retryCount) => {
+    console.log(`retry attempt: ${retryCount}`);
+    return retryCount * 1; // time interval between retries
+  },
+  retryCondition: (error) => {
+    // if retry condition is not specified, by default idempotent requests are retried
+    return error.response.status === 503;
+  },
+});
 
 // Asynchronous Action Creators
 
