@@ -26,8 +26,7 @@ jobs:
         registry: docker.pkg.github.com
         username: ${{ secrets.MY_GITHUB_USERNAME }}
         password: ${{ secrets.GITHUB_TOKEN }}
-        # dockerfile: Dockerfile-prod
-        docker_compose: docker-compose.yml
+        dockerfile: Dockerfile-prod
         tags: latest
     - name: Deploy package to digitalocean
       uses: appleboy/ssh-action@master
