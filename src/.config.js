@@ -1,3 +1,3 @@
 module.exports = {
-    apiURL: 'http://localhost:5000/api',
+    apiURL: 'http://reac-panda:5000/api',
 }
