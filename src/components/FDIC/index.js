@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   CircularProgress,
   InputLabel,
@@ -6,6 +6,11 @@ import {
   OutlinedInput,
   Select,
 } from '@material-ui/core';
+import CardContent from '@mui/material/CardContent';
+import Collapse from '@mui/material/Collapse';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import IconButton from '@mui/material/IconButton';
 
 import Chart from './chart';
 
@@ -32,7 +37,18 @@ export default function FDIC(props) {
 
   // const initialState = {
   // };
-  // const [ state, setState ] = useState(initialState);
+  const [ expanded, setExpanded ] = useState(false);
+  const [ selectedCodes, setSelectedCode ] = useState(
+    {
+      selectedCodeOne: null,
+      selectedCodeTwo: null,
+      selectedCodeThree: null,
+    }
+  )
+
+  function handleExpandClick() {
+    setExpanded(!expanded);
+  }
 
   function handleSelectPeriodDate(event) {
     props.handlers.selectPeriodDate(
@@ -43,6 +59,43 @@ export default function FDIC(props) {
 
   function handleSelectFiler(event) {
     props.handlers.selectFiler(event.target.value);
+  }
+
+  function handleSelectCode(event) {
+    setSelectedCode({
+      ...selectedCodes,
+      [event.target.name]: event.target.value,
+    })
+  }
+
+  function renderCodeOption(option) {
+    return (
+      <MenuItem key={option} value={option === 'NONE' ? '' : option}>
+        { `${option}` }
+      </MenuItem>
+    )
+  }
+
+  function renderCodeOptions(options) {
+    return options.map(option => renderCodeOption(option));
+  }
+  
+  function renderSelectCode(number) {
+    return props.data.callReportData ?
+      <div className="SelectContainer">
+        <InputLabel style={{color: 'white'}}>Select Code</InputLabel>
+        <Select
+          className="Select"
+          name={"selectedCode" + number}
+          onChange={handleSelectCode}
+          value={selectedCodes["selectedCode" + number]}
+          input={
+            <OutlinedInput name="periodDate" labelWidth={100}/>
+          }
+        >
+          { renderCodeOptions(props.data.allowableCodes) }
+        </Select>
+      </div> : null;
   }
 
   function renderOption(option) {
@@ -121,28 +174,75 @@ export default function FDIC(props) {
       <Chart
         props={props}
         callReportData={props.data.callReportData}
-        threeYearRange={props.data.threeYearRange}  
+        threeYearRange={props.data.threeYearRange}
+        selectedCodeOne={selectedCodes.selectedCodeOne}
+        selectedCodeTwo={selectedCodes.selectedCodeTwo}
+        selectedCodeThree={selectedCodes.selectedCodeThree}
       /> :
       null;
   }
 
+  function renderExpandIconButton() {
+    let styleProperties = {
+      transform: expanded ? 'rotate(0deg)' : 'rotate(180deg)',
+      transition: '.2s'
+    }
+
+    return (
+      <IconButton
+          className="InfoTextButton"
+          expand={expanded}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+          style={styleProperties}
+        >
+        <ExpandMoreIcon />
+      </IconButton>
+    )
+  }
+
   function renderDescription() {
-    return <div className="Information">
-      <p>
-        Probem: All federally insured banks must submit publicly available call report data to the fed
-        on a quarterly basis. However, these must be accessed as bulk CSVs one quarter at a time, making
-        it difficult to source data over a large span of time for analysis.</p>
-      <p>
-        Solution: Using the FDICs archaic system of SOAP requests we can pull all FDIC filer IDs then
-        iterate requests for as many quarters of data as we would like.</p>
-      <p>
-        Purpose: This POC demonstrates the viability of quickly accessing data that should be easily 
-        available for public consumption and analysis of institutions dependent on taxpayers.</p>
-      <p>
-        Note: After selecting a period date and filer, data for the previous three years will be fetched.
-        Field codes to select from are limited to those with values within a certain range for visualization
-      </p>
-    </div>
+    // return <Collapse in={true}>asdf<div className="Information">
+    //   <p>
+    //     Probem: All federally insured banks must submit publicly available call report data to the fed
+    //     on a quarterly basis. However, these must be accessed as bulk CSVs one quarter at a time, making
+    //     it difficult to source data over a large span of time for analysis.</p>
+    //   <p>
+    //     Solution: Using the FDICs archaic system of SOAP requests we can pull all FDIC filer IDs then
+    //     iterate requests for as many quarters of data as we would like.</p>
+    //   <p>
+    //     Purpose: This POC demonstrates the viability of quickly accessing data that should be easily 
+    //     available for public consumption and analysis of institutions dependent on taxpayers.</p>
+    //   <p>
+    //     Note: After selecting a period date and filer, data for the previous three years will be fetched.
+    //     Field codes to select from are limited to those with values within a certain range for visualization
+    //   </p>
+    // </div></Collapse>
+     return(
+      <div className="InfoTextContainer">
+        {renderExpandIconButton()}
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <CardContent>
+            <Typography className="InfoText" paragraph>
+              Problem: All federally insured banks must submit publicly available call report data to the fed
+              on a quarterly basis. However, these must be accessed as bulk CSVs one quarter at a time, making
+              it difficult to source data over a large span of time for analysis.
+            </Typography>
+            <Typography className="InfoText" paragraph>
+              Solution:  Using the FDICs archaic system of SOAP requests we can pull all FDIC filer IDs then
+              iterate requests for as many quarters of data as we would like.</Typography>
+            <Typography className="InfoText" paragraph>
+              Purpose:  This POC demonstrates the viability of quickly accessing data that should be easily 
+              available  for public consumption and analysis of institutions dependent on taxpayers.</Typography>
+            <Typography className="InfoText" paragraph>
+              Note: After selecting a period date and filer, data for the previous three years will be fetched.
+              Field codes to select from are limited to those with values within a certain range for visualization
+            </Typography>
+          </CardContent>
+        </Collapse>
+      </div>
+     )
   }
 
   return (
@@ -150,6 +250,9 @@ export default function FDIC(props) {
       {renderDescription()}
       {renderSelectPeriodDate()}
       {renderSelectFilerId()}
+      {renderSelectCode("One")}
+      {renderSelectCode("Two")}
+      {renderSelectCode("Three")}
       {renderChart()}
     </div>
   )
