@@ -12,7 +12,7 @@ export default function NavBar() {
           >
             <Tab label="HOME" href="/" to="/"   />
             <Tab label="FDIC" href="/fdic" to="/fdic"  />
-            <Tab label="FITNESS" href="/fitness" to="/fitness" />
+            {/* <Tab label="FITNESS" href="/fitness" to="/fitness" /> */}
             <Tab label="NEWS" href="/news"  to="/news" />
           </Tabs>
         </AppBar>

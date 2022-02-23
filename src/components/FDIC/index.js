@@ -7,6 +7,7 @@ import {
   Select,
 } from '@material-ui/core';
 import CardContent from '@mui/material/CardContent';
+import Card from '@mui/material/Card';
 import Collapse from '@mui/material/Collapse';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -35,8 +36,6 @@ export default function FDIC(props) {
     }
   })
 
-  // const initialState = {
-  // };
   const [ expanded, setExpanded ] = useState(false);
   const [ selectedCodes, setSelectedCode ] = useState(
     {
@@ -189,6 +188,7 @@ export default function FDIC(props) {
     }
 
     return (
+      // <div>
       <IconButton
           className="InfoTextButton"
           expand={expanded}
@@ -199,47 +199,40 @@ export default function FDIC(props) {
         >
         <ExpandMoreIcon />
       </IconButton>
+      /* {expanded ? '' : 'Click For Info'}
+      </div> */
     )
   }
 
   function renderDescription() {
-    // return <Collapse in={true}>asdf<div className="Information">
-    //   <p>
-    //     Probem: All federally insured banks must submit publicly available call report data to the fed
-    //     on a quarterly basis. However, these must be accessed as bulk CSVs one quarter at a time, making
-    //     it difficult to source data over a large span of time for analysis.</p>
-    //   <p>
-    //     Solution: Using the FDICs archaic system of SOAP requests we can pull all FDIC filer IDs then
-    //     iterate requests for as many quarters of data as we would like.</p>
-    //   <p>
-    //     Purpose: This POC demonstrates the viability of quickly accessing data that should be easily 
-    //     available for public consumption and analysis of institutions dependent on taxpayers.</p>
-    //   <p>
-    //     Note: After selecting a period date and filer, data for the previous three years will be fetched.
-    //     Field codes to select from are limited to those with values within a certain range for visualization
-    //   </p>
-    // </div></Collapse>
      return(
-      <div className="InfoTextContainer">
+      <div className="InfoTextContainer" onClick={handleExpandClick}>
         {renderExpandIconButton()}
+        {expanded ? '' : 'Click For Info'}
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-            <CardContent>
-            <Typography className="InfoText" paragraph>
-              Problem: All federally insured banks must submit publicly available call report data to the fed
-              on a quarterly basis. However, these must be accessed as bulk CSVs one quarter at a time, making
-              it difficult to source data over a large span of time for analysis.
-            </Typography>
-            <Typography className="InfoText" paragraph>
-              Solution:  Using the FDICs archaic system of SOAP requests we can pull all FDIC filer IDs then
-              iterate requests for as many quarters of data as we would like.</Typography>
-            <Typography className="InfoText" paragraph>
-              Purpose:  This POC demonstrates the viability of quickly accessing data that should be easily 
-              available  for public consumption and analysis of institutions dependent on taxpayers.</Typography>
-            <Typography className="InfoText" paragraph>
-              Note: After selecting a period date and filer, data for the previous three years will be fetched.
-              Field codes to select from are limited to those with values within a certain range for visualization
-            </Typography>
-          </CardContent>
+            <Card
+              className="InfoCard"
+              raised={true}
+              variant="outlined"
+            >
+              <CardContent>
+                <Typography className="InfoText" paragraph>
+                  Problem: All federally insured banks must submit publicly available call report data to the fed
+                  on a quarterly basis. However, these must be accessed as bulk CSVs one quarter at a time, making
+                  it difficult to source data over a large span of time for analysis.
+                </Typography>
+                <Typography className="InfoText" paragraph>
+                  Solution:  Using the FDICs archaic system of SOAP requests we can pull all FDIC filer IDs then
+                  iterate requests for as many quarters of data as we would like.</Typography>
+                <Typography className="InfoText" paragraph>
+                  Purpose:  This POC demonstrates the viability of quickly accessing data that should be easily 
+                  available  for public consumption and analysis of institutions dependent on taxpayers.</Typography>
+                <Typography className="InfoText" paragraph>
+                  Note: After selecting a period date and filer, data for the previous three years will be fetched.
+                  Field codes to select from are limited to those with values within a certain range for visualization
+                </Typography>
+            </CardContent>
+          </Card>
         </Collapse>
       </div>
      )

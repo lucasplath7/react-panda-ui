@@ -21,16 +21,23 @@
 
 .InfoTextContainer {
   width: 90%;
-  margin-left: auto;
+  margin-left: 15px;
   margin-right: auto;
+  color: white;
+  position: absolute;
+  z-index: 10;
 }
 
 .InfoTextButton {
   color: white !important
 }
 
+.InfoCard {
+  background-color: lightgray !important;
+}
+
 .InfoText {
-  color: white;
+  color: black;
 }
 
 .SelectContainer {
@@ -51,7 +58,7 @@
 
 .ChartContent {
   display: flex;
-  width: 10%;
+  width: 70%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -64,57 +71,6 @@
 }
 
 @media only screen and (max-width: 480px) {
-  .Application {
-    /* width: 100%;
-    height: 100%; */
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
-    background-color: rgb(61, 59, 59);
-  }
-  
-  .Content {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
-  }
-  
-  .Progress {
-    margin-left: auto !important;
-    margin-right: auto !important;
-    margin-bottom: 10px !important;
-  }
-  
-  .InfoTextContainer {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .InfoTextButton {
-    color: white !important
-  }
-  
-  .InfoText {
-    color: white;
-  }
-  
-  .SelectContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .Select {
-    height: 40px;
-    width: 35% !important;
-    background-color: grey;
-    margin-bottom: 10px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
   .ChartContent {
     display: flex;
     width: 90%;

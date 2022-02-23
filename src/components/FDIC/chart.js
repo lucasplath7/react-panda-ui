@@ -1,10 +1,4 @@
 import React, { useState } from 'react';
-import {
-  InputLabel,
-  MenuItem,
-  OutlinedInput,
-  Select,
-} from '@material-ui/core';
 import { Line } from 'react-chartjs-2';
 
 
@@ -17,43 +11,6 @@ export default function Chart(props) {
   // })
 
   // const [ state, setState ] = useState(initialState);
-
-  // function handleSelectField(event) {
-  //   setState({
-  //     ...state,
-  //     [event.target.name]: event.target.value,
-  //   })
-  // }
-
-  // function renderOption(option) {
-  //   return (
-  //     <MenuItem key={option} value={option === 'NONE' ? '' : option}>
-  //       { `${option}` }
-  //     </MenuItem>
-  //   )
-  // }
-
-  // function renderOptions(options) {
-  //   return options.map(option => renderOption(option));
-  // }
-  
-  // function renderSelectField(number) {
-  //   return props.callReportData ?
-  //     <div className="SelectContainer">
-  //       <InputLabel style={{color: 'white'}}>Select Field</InputLabel>
-  //       <Select
-  //         className="Select"
-  //         name={"selectedField" + number}
-  //         onChange={handleSelectField}
-  //         value={state["selectedField" + number]}
-  //         input={
-  //           <OutlinedInput name="periodDate" labelWidth={100}/>
-  //         }
-  //       >
-  //         { renderOptions(state.allowableFields) }
-  //       </Select>
-  //     </div> : null;
-  // }
 
   function renderLineChart() {
     const selectedCodes = [props.selectedCodeOne, props.selectedCodeTwo, props.selectedCodeThree].filter(value => value);
@@ -89,9 +46,6 @@ export default function Chart(props) {
 
   return (
       <div className="ChartContent">
-        {/* {renderSelectField("One")}
-        {renderSelectField("Two")}
-        {renderSelectField("Three")} */}
         {renderLineChart()}
       </div>
   )
