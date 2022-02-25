@@ -30,6 +30,26 @@ export default function Chart(props) {
       }
     })
 
+    const options = {
+      legend: {
+        labels: {
+          fontColor: 'gainsboro'
+        }
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            fontColor: 'gainsboro'
+          },
+        }],
+      xAxes: [{
+        ticks: {
+          fontColor: 'gainsboro'
+        },
+      }]
+    } 
+    }
+
     return selectedCodes.length > 0 ? (
       <Line 
         color={'white'}
@@ -40,6 +60,8 @@ export default function Chart(props) {
           labels: labels,
           datasets: dataSets
         }}
+        options={options}
+        style={{color: 'white'}}
 			/>
     ) : null;
   }

@@ -82,7 +82,7 @@ export default function FDIC(props) {
   function renderSelectCode(number) {
     return props.data.callReportData ?
       <div className="SelectContainer">
-        <InputLabel style={{color: 'white'}}>Select Code</InputLabel>
+        <InputLabel style={{color: 'gainsboro'}}>Select Code</InputLabel>
         <Select
           className="Select"
           name={"selectedCode" + number}
@@ -120,7 +120,7 @@ export default function FDIC(props) {
 
     return props.data.periodDates ?
       <div className="SelectContainer" style={{marginTop: '50px'}}>
-        <InputLabel style={{color: 'white'}}>Select Period Date</InputLabel>
+        <InputLabel style={{color: 'gainsboro'}}>Select Period Date</InputLabel>
         <Select
           className="Select"
           onChange={handleSelectPeriodDate}
@@ -145,7 +145,7 @@ export default function FDIC(props) {
 
     return props.data.filers ?
       <div className="SelectContainer">
-        <InputLabel style={{color: 'white'}}>Select Filer ID</InputLabel>
+        <InputLabel style={{color: 'gainsboro'}}>Select Filer ID</InputLabel>
         <Select
           className="Select"
           name="Select Filer"

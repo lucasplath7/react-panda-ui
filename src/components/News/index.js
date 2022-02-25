@@ -5,10 +5,15 @@ import {
   InputLabel,
   Slider,
 } from '@material-ui/core';
-import ReactSpritz from 'react-spritz';
+// import ReactSpritz from 'react-spritz';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import IconButton from '@mui/material/IconButton';
+
+import ReactSpritz from './react-spritz-custom';
 
 import './index.css';
-import 'react-spritz/build/main.css';
+// import 'react-spritz/build/main.css';
 
 const MARKS = [
   {
@@ -37,14 +42,18 @@ export default function News(props) {
     play: false,
     index: 0,
     type: 'LEGIT',
+    wpm: 450,
   };
   
   const [ state, setState ] = useState(initialState);
-
-  function handleClick(event) {
+  const [ wpm, setWPM] = useState(450);
+console.log('state: ', state)
+console.log('wpm: ', wpm)
+  function handleClickPlay(event) {
     setState({
       ...state,
-      play: !state.play
+      wpm: wpm,
+      play: !state.play,
     })
   }
 
@@ -55,6 +64,14 @@ export default function News(props) {
         state.index + 1 :
         0,
     })
+  }
+
+  function handleSlowSpeed(event) {
+    setWPM(wpm - 50);
+  }
+
+  function handleRaiseSpeed(event) {
+    setWPM(wpm + 50);
   }
 
   function handleChange(event, value) {
@@ -94,12 +111,12 @@ export default function News(props) {
         <ReactSpritz
           className='Reader'
           text={props.data.newsData.filter(i => i.leans === state.type)[state.index].article}
-          wpm={450}
+          wpm={wpm}
           playing={state.play}
           style={{width: '300px'}}
         />
         <Button
-          onClick={handleClick}
+          onClick={handleClickPlay}
           className='PlayButton'
         >
           {!state.play ? 'PLAY' : 'STOP'}
@@ -110,6 +127,24 @@ export default function News(props) {
         >
           NEXT
         </Button>
+        <div style={{color: 'white'}}>
+          <IconButton
+            className="SlowDownButton"
+            onClick={handleSlowSpeed}
+            id="slowdown"
+            style={{color: 'white'}}
+          >
+            <ArrowBackIosIcon />
+          </IconButton>
+            {wpm} words per minute
+          <IconButton
+            className="SpeedUpButton"
+            onClick={handleRaiseSpeed}
+            style={{color: 'white'}}
+          >
+            <ArrowForwardIosIcon />
+          </IconButton>
+        </div>
       </div>
   )
 }

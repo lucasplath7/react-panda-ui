@@ -23,13 +23,13 @@
   width: 90%;
   margin-left: 15px;
   margin-right: auto;
-  color: white;
+  color: gainsboro !important;
   position: absolute;
   z-index: 10;
 }
 
 .InfoTextButton {
-  color: white !important
+  color: gainsboro !important
 }
 
 .InfoCard {
@@ -51,6 +51,7 @@
   height: 40px;
   width: 35% !important;
   background-color: grey;
+  color: gainsboro !important;
   margin-bottom: 10px;
   margin-left: auto;
   margin-right: auto;
@@ -61,13 +62,6 @@
   width: 70%;
   margin-left: auto;
   margin-right: auto;
-}
-
-.chartjs-render-monitor {
-  /* width: 50% !important;
-  height: 50% !important;
-  margin-left: auto;
-  margin-right: auto; */
 }
 
 @media only screen and (max-width: 480px) {
