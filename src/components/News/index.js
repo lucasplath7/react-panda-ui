@@ -47,8 +47,7 @@ export default function News(props) {
   
   const [ state, setState ] = useState(initialState);
   const [ wpm, setWPM] = useState(450);
-console.log('state: ', state)
-console.log('wpm: ', wpm)
+
   function handleClickPlay(event) {
     setState({
       ...state,
@@ -114,6 +113,7 @@ console.log('wpm: ', wpm)
           wpm={wpm}
           playing={state.play}
           style={{width: '300px'}}
+          normalized={true}
         />
         <Button
           onClick={handleClickPlay}
