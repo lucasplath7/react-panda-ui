@@ -13,23 +13,28 @@ import IconButton from '@mui/material/IconButton';
 import ReactSpritz from './react-spritz-custom';
 
 import './index.css';
+import { Typography } from '../material-ui';
 // import 'react-spritz/build/main.css';
 
 const MARKS = [
   {
     value: 0,
-    label: 'FAR-LEFT',
+    label: <Typography variant='body1'>FAR-LEFT</Typography>,
   },
   {
     value: 1,
-    label: 'ACTUAL-NEWS',
+    label: <Typography variant='body1'>ACTUAL-NEWS</Typography>,
   },
   {
     value: 2,
-    label: 'FAR-RIGHT',
+    label: <Typography variant='body1'>FAR-RIGHT</Typography>,
   }
-
 ]
+const NEWS_CATEGORIES = {
+  0: 'FAR-LEFT',
+  1: 'LEGIT',
+  2: 'FAR-RIGHT',
+}
 
 export default function News(props) {
   useEffect(() => {
@@ -73,16 +78,11 @@ export default function News(props) {
     setWPM(wpm + 50);
   }
 
-  function handleChange(event, value) {
-    let type;
-    if (value === 0) type = 'FAR-LEFT';
-    if (value === 1) type = 'LEGIT';
-    if (value === 2) type = 'FAR-RIGHT';
-    
+  function handleChange(event, value) {    
     setState({
       ...state,
       index: 0,
-      type: type,
+      type: NEWS_CATEGORIES[value],
     })
   }
 
@@ -90,23 +90,26 @@ export default function News(props) {
     !props.data.newsData ?
       <div className="NewsPlaceholder">
         <CircularProgress className="Progress"></CircularProgress>
-        <InputLabel style={{color: 'white'}}>Loading News...</InputLabel>
+        <InputLabel>Loading News...</InputLabel>
       </div>
         :
-      <div className={'NewsPlaceholder'}>
+      <div className='NewsPlaceholder'>
         <Slider
-          className="Slider"
+          className='Slider'
           defaultValue={1}
-          aria-labelledby="discrete-slider"
+          aria-labelledby='discrete-slider'
           onChange={handleChange}
-          valueLabelDisplay="off"
+          valueLabelDisplay='off'
           step={1}
           marks={MARKS}
           min={0}
           max={2}
         />
-        <h4>SOURCE: {props.data.newsData.filter(i => i.leans === state.type)[state.index].sourceName}</h4>
-        <h4>TITLE: {props.data.newsData.filter(i => i.leans === state.type)[state.index].title}</h4>
+        <Typography variant='body2' align='center'>
+          SOURCE: {props.data.newsData.filter(i => i.leans === state.type)[state.index].sourceName}
+          <br/>
+          TITLE: {props.data.newsData.filter(i => i.leans === state.type)[state.index].title}
+        </Typography>
         <ReactSpritz
           className='Reader'
           text={props.data.newsData.filter(i => i.leans === state.type)[state.index].article}
@@ -117,30 +120,38 @@ export default function News(props) {
         />
         <Button
           onClick={handleClickPlay}
-          className='PlayButton'
+          variant='contained'
+          color='primary'
         >
-          {!state.play ? 'PLAY' : 'STOP'}
+          <Typography variant='body1'>
+            {!state.play ? 'PLAY' : 'STOP'}
+          </Typography>
         </Button>
         <Button
           onClick={handleNext}
-          className='PlayButton'
+          variant='contained'
+          color='secondary'
         >
-          NEXT
+          <Typography variant='body1'>
+            NEXT
+          </Typography>
         </Button>
-        <div style={{color: 'white'}}>
+        <div style={{color: 'gainsboro', display: 'flex', flexDirection: 'row'}}>
           <IconButton
             className="SlowDownButton"
             onClick={handleSlowSpeed}
             id="slowdown"
-            style={{color: 'white'}}
+            style={{color: 'gainsboro'}}
           >
             <ArrowBackIosIcon />
           </IconButton>
-            {wpm} words per minute
+           <Typography class='v-mid' variant='body1'>
+              {wpm} words per minute
+            </Typography>
           <IconButton
             className="SpeedUpButton"
             onClick={handleRaiseSpeed}
-            style={{color: 'white'}}
+            style={{color: 'gainsboro'}}
           >
             <ArrowForwardIosIcon />
           </IconButton>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './index.css';
 
@@ -24,138 +24,98 @@ export default function ReactSpritz(props) {
     standardTempo: Math.trunc(ONE_MINUTE / props.wpm),
     startTimeout: props.startTimeout ? props.startTimeout : 800,
     text: props.text,
-    //timeout: null,
     words: textToWords(props.text),
     wpm: props.wpm,
+    textUpdated: false,
+    timeout: null,
   };
 
   const [ state, setState ] = useState(initialState);
-  const [ timeout, setTimeoutFunction ] = useState(null);
-  //const [ playing, setPlaying ] = useState(false);
 
-  console.log('state: ', state)
-  console.log('timeout: ', timeout)
   useEffect(() => {
     handleChangeText();
   }, [props.text])
 
   useEffect(() => {
-    if (props.playing) {
-      start()
-    }
-
-    if (!props.playing) handleStop();
-
+    props.playing ? start() : stop();
   }, [props.playing]);
 
   useEffect(() => {
-    handleChangeText();
-  }, [props.text]);
-
-  useEffect(() => {
-    // if (state.wpm !== props.wpm) {
-    //   clearTimeout(state.timeout);
-    //   setState({
-    //     ...state,
-    //     wpm: props.wpm,
-    //   })
-    // }
     handleUpdateWPM();
   }, [props.wpm])
 
-console.log('should use standard effect: ', (state.playing
-  && props.playing
-  && state.text === props.text
-  && state.wpm === props.wpm
-  && !timeout))
-
   useEffect(() => {
-    if (
+    if ( 
       state.playing
       && props.playing
       && state.text === props.text
       && state.wpm === props.wpm
       && state.currentWordIndex < state.words.length
-      //&& !timeout
+      && !state.timeout
     ) {
-      console.log('STANDARD CONTINUE PLAY EFFECT: ')
-      console.log('state.timeout: ', state.timeout)
-      //TIMEOUT = setTimeout(displayNextWord, state.currentWordIndex === 0 ? 1000 : getNextWordTimeout());
-      // setState({
-      //   ...state,
-      //   timeout: setTimeout(displayNextWord, state.currentWordIndex === 0 ? 1000 : getNextWordTimeout()),
-      // })
-      
-      // setTimeoutFunction(setTimeout(displayNextWord, state.currentWordIndex === 0 ? 1000 : getNextWordTimeout()))
-      setTimeout(displayNextWord, state.currentWordIndex === 0 ? 1000 : getNextWordTimeout())
+      setState({
+        ...state,
+        timeout: setTimeout(displayNextWord, state.currentWordIndex === 0 ? 1000 : getNextWordTimeout()),
+      });
     }
   });
 
   function start() {
-    console.log('START: ')
-    
-    // setTimeoutFunction(setTimeout(displayNextWord, 1000))
     setState({
       ...state,
-      //currentWordIndex: state.currentWordIndex + 1,
       playing: true,
-      //timeout: setTimeout(displayNextWord, 1000),
     });
-    //setTimeoutFunction(setTimeout(displayNextWord, 1000))
-    // setPlaying(true);
   }
 
-  function displayNextWord() {
-    console.log('DISPLAY NEXT WORD: ')
-    console.log('state in display next word: ', state)
+  function stop() {
+    setState({
+      ...state,
+      playing: false,
+    })
+  } 
+
+  const displayNextWord = (function displayNextWord() {
+    if (state.text === props.text) {
       setState({
           ...state,
           currentWordIndex: state.currentWordIndex + 1,
       });
-  }
-
-  function getNextWordTimeout() {
-      const word = state.words[state.currentWordIndex];
-      const { normalized } = props;
-  
-      let wordTimeout = normalized ? word.length * state.charTempo : state.standardTempo;
-  
-      const delay = /^\(|[,.)]$/.test(word) || isEmoji(word);
-      if (delay) wordTimeout += state.standardTempo;
-  
-      // ensure, the timeout between words is not less than a wpm
-      return Math.max(wordTimeout, state.standardTempo);
-  }
-
-  function handleStop() {
-      //setPlaying(false);
-      console.log('HANDLE STOP')
-      clearTimeout(state.timeout)
-      setState({
-        ...state,
-        playing: false,
-      })
-  }
+    }
+  }).bind({props, state})
 
   function handleChangeText() {
-      console.log('HANDLE CHANGE TEXT')
-      setState({
-          ...state,
-          text: props.text,
-          charTempo: charTimeout(props.text, state.wpm),
-          words: textToWords(props.text),
-          currentWordIndex: 0,
-      });
+    setState({
+        ...state,
+        charTempo: charTimeout(props.text, state.wpm),
+        currentWordIndex: 0,
+        text: props.text,
+        words: textToWords(props.text),
+        timeout: clearTimeout(state.timeout),
+    });
   }
 
   function handleUpdateWPM() {
-      setState({
-          ...state,
-          wpm: props.wpm,
-          charTempo: charTimeout(props.text, props.wpm),
-          standardTempo: Math.trunc(ONE_MINUTE / props.wpm),
-      })
+    setState({
+        ...state,
+        charTempo: charTimeout(props.text, props.wpm),
+        standardTempo: Math.trunc(ONE_MINUTE / props.wpm),
+        wpm: props.wpm,
+        timeout: clearTimeout(state.timeout),
+    })
   }
+
+  function getNextWordTimeout() {
+    const word = state.words[state.currentWordIndex];
+    const { normalized } = props;
+
+    let wordTimeout = normalized ? word.length * state.charTempo : state.standardTempo;
+
+    const delay = /^\(|[,.)]$/.test(word) || isEmoji(word);
+    if (delay) wordTimeout += state.standardTempo;
+
+    // ensure, the timeout between words is not less than a wpm
+    return Math.max(wordTimeout, state.standardTempo);
+}
 
   const { currentWordIndex } = state;
   const word = currentWordIndex !== -1 && state.words[currentWordIndex];

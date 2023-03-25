@@ -49,6 +49,7 @@ function fdicReducer(state = initialState, action) {
       newState = {
         ...state,
         fetchingFilers: true,
+        callReportData: null,
       };
       break;
     case actionTypes.FETCH_FILER_IDS_FAILURE:
@@ -75,6 +76,7 @@ function fdicReducer(state = initialState, action) {
       newState = {
         ...state,
         fetchingReports: true,
+        callReportData: null,
       };
       break;
     case actionTypes.FETCH_CALL_REPORTS_FAILURE:

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  CircularProgress,
+  // CircularProgress,
   InputLabel,
   MenuItem,
   OutlinedInput,
@@ -13,9 +13,11 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import IconButton from '@mui/material/IconButton';
 
+// Custom Components
 import Chart from './chart';
+import { CircularProgress } from '../material-ui';
 
-import './index.css';
+// import './index.css';
 
 export default function FDIC(props) {
   useEffect(() => {

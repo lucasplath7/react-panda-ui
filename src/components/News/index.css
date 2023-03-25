@@ -6,34 +6,23 @@
   align-content: space-between;
   align-items: center;
   justify-content: center;
+  row-gap: 30px;
   background-color: rgb(61, 59, 59);
 }
 
 .SpeedReader {
-  background-color: white;
-}
-
-.PlayButton {
-  border-width: 1px !important;
-  border-style: solid !important;
-  border-color: white !important;
-  margin: 20px !important;
-  color: white !important;
-}
-
-.container {
-  width: 300px !important;
-  background-color: white;
+  background-color: gainsboro;
 }
 
 h4 {
-  color: white;
+  color: gainsboro;
 }
 
 .Slider {
   width: 80% !important;
+  color: #4559f5 !important;
 }
 
 .MuiSlider-markLabel {
-  color: white !important;
+  color: gainsboro !important;
 }

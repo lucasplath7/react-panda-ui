@@ -1,30 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Line } from 'react-chartjs-2';
 
+// Custom Modules
+import { Typography } from './../material-ui';
 
 // import './index.css';
 
 export default function Chart(props) {
-
-  // useEffect(() => {
-   
-  // })
-
-  // const [ state, setState ] = useState(initialState);
-
+  
   function renderLineChart() {
-    //const selectedCodes = [props.selectedCodeOne, props.selectedCodeTwo, props.selectedCodeThree].filter(value => value);
-    const selectedCodes = props.data.selectedCodes
-    //const range = props.threeYearRange;
-    const range = props.data.dateRange
-    const labels = range.map(date => date.id).sort((a, b) => new Date(a) - new Date(b));
-    console.log('labels: ', labels);
+    const labels = props.data.dateRange
+      .map(date => date.id)
+      .sort((a, b) => new Date(a) - new Date(b))
     const colors = ['#26CE1E','#BD4FFC','#FCBD4F','#4FC2FC','#FC4F6C']
 
-    const dataSets = selectedCodes.map((code, index) => {
+    const dataSets = props.data.selectedCodes.map((code, index) => {
       const points = labels.map((date) => {
-        console.log('date: ', date)
-        return {x: date.id, y: props.callReportData[date][code]};
+        return {x: date, y: +props.data.callReportData[date][code]};
       })
       return {
         data: points,
@@ -45,18 +37,32 @@ export default function Chart(props) {
           ticks: {
             fontColor: 'gainsboro'
           },
+          gridLines: {
+            color: '#717171',
+            // drawBorder: false,
+            tickMarkLength: 10,
+            // zeroLineWidth: 0,
+            lineWidth: .5,
+          }
         }],
       xAxes: [{
         ticks: {
           fontColor: 'gainsboro'
         },
-      }]
+        gridLines: {
+          color: '#717171',
+          // drawBorder: false,
+          tickMarkLength: 10,
+          // zeroLineWidth: 0,
+          lineWidth: .5,
+        }
+      }],
     } 
     }
 
-    return selectedCodes.length > 10 ? (
+    return props.data.selectedCodes.length > 0 ? (
       <Line 
-        color={'white'}
+        color={'red'}
         className="Chart"
 				width={200}
 				height={150}
@@ -65,7 +71,7 @@ export default function Chart(props) {
           datasets: dataSets
         }}
         options={options}
-        style={{color: 'white'}}
+        // style={{color: 'white'}}
 			/>
     ) : null;
   }
