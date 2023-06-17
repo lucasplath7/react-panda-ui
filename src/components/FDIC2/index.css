@@ -21,6 +21,10 @@
   margin-right: auto;
 }
 
+.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #323e9c !important;
+}
+
 .ChartContent {
   display: flex;
   width: 70%;
@@ -42,6 +46,79 @@
   margin-top: 10px !important;
 }
 
+.fdic-info-icon {
+  color: gainsboro;
+}
+
+.info-text {
+  color: rgb(61, 59, 59) !important;
+  margin-bottom: 15px !important;
+}
+
 .fdic-options {
-  justify-content: center;
+  justify-content: flex-start;
+}
+
+.fdic-container {
+  padding-top: 5%;
+  opacity: .7;
+}
+
+.place-grid {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  text-align: center;
+
+}
+
+.place-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.place-block {
+  /* display: inline-block; */
+  border: 1px solid gainsboro;
+  width: 50px;
+  height: 50px;
+  opacity: .2;
+}
+
+.no-data-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: .2 !important;
+}
+
+.reveal {
+  animation: reveal_placeholder 1s ease forwards;
+}
+
+.hide {
+  animation: hide_placeholder 1s ease forwards;
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes hide_placeholder {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes reveal_placeholder {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

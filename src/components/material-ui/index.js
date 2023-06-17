@@ -1,4 +1,9 @@
 import CircularProgress from './CircularProgress';
+import {
+  Dialog,
+  DialogTitle,
+} from './SimpleDialog';
+import { HelpIcon } from './Icons';
 import Select from './Select';
 import {
   InputLabel,
@@ -15,6 +20,8 @@ import theme from './theme.js';
 
 export {
   CircularProgress,
+  Dialog,
+  DialogTitle,
   InputLabel,
   Menu,
   MenuItem,
@@ -22,5 +29,8 @@ export {
   OutlinedInput,
   Select,
   Typography,
+  // Icons
+  HelpIcon,
+  // Style
   theme,
 }

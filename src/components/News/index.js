@@ -5,12 +5,12 @@ import {
   InputLabel,
   Slider,
 } from '@material-ui/core';
-// import ReactSpritz from 'react-spritz';
+import SpeedRead from 'speed-read-v1';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import IconButton from '@mui/material/IconButton';
 
-import ReactSpritz from './react-spritz-custom';
+// import ReactSpritz from './react-spritz-custom';
 
 import './index.css';
 import { Typography } from '../material-ui';
@@ -110,7 +110,7 @@ export default function News(props) {
           <br/>
           TITLE: {props.data.newsData.filter(i => i.leans === state.type)[state.index].title}
         </Typography>
-        <ReactSpritz
+        <SpeedRead
           className='Reader'
           text={props.data.newsData.filter(i => i.leans === state.type)[state.index].article}
           wpm={wpm}

@@ -1,19 +1,7 @@
 // Material-UI
-import { createTheme, responsiveFontSizes } from '@material-ui/core/styles'
+import { createTheme, responsiveFontSizes } from '@material-ui/core'
 
 let theme = createTheme({
-  components: {
-    MuiInputBase: {
-      styleOverrides: {
-        colorPrimary: {
-          backgroundColor: 'red',
-        },
-        colorSecondary: {
-          backgroundColor: '#232c6b',
-        },
-      },
-    }
-  },
   overrides: {
     MuiButton: {
       containedPrimary: {
@@ -33,33 +21,39 @@ let theme = createTheme({
           color: '#012169',
         }
       },
-    },
-    MuiOutlinedInput: {
-        root: {
-          backgroundColor: 'red'
-        },
-        colorPrimary: {
-          backgroundColor: 'red',
-          borderColor: 'red'
-        },
-        colorSecondary: {
-          backgroundColor: '#232c6b',
-        },
-      
-    }
+    }, 
+    // MuiOutlinedInput: {
+    //   root: {
+    //     '& $focused': {
+    //       '& $notchedOutline': {
+    //         borderColor: 'red',
+    //       },
+    //     },
+    //   },
+    //   notchedOutline: {
+    //     borderColor: 'red',
+    //   },
+    // },
   },
   palette: {
     primary: {
       main: '#323e9c',
+      light: '#323e9c',
+      dark: '#323e9c',
       contrastText: '#dcdcdc',
     },
     secondary: {
       main: '#232c6b',
       contrastText: '#dcdcdc',
     },
+    action: {
+      focused: '#f70202',
+      selected: '#f70202',
+      active: '#f70202',
+    },
     text: {
       primary: '#dcdcdc',
-      secondary: '#dcdcdc6',
+      secondary: '#dcdcdc',
     },
   },
   typography: {
@@ -67,6 +61,12 @@ let theme = createTheme({
       color: '#dcdcdc'
     },
     body2: {
+      color: '#dcdcdc'
+    },
+    bodyInfo: {
+      color: 'red'
+    },
+    h2: {
       color: '#dcdcdc'
     },
   }

@@ -5,11 +5,15 @@ import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Chip from '@mui/material/Chip';
 import Tooltip from '@mui/material/Tooltip';
+import TextField from '@mui/material/TextField';
 
 // Custom Modules
 import Chart from './chart';
 import {
   CircularProgress,
+  Dialog,
+  DialogTitle,
+  HelpIcon,
   InputLabel,
   MenuItem,
   OutlinedInput,
@@ -30,7 +34,7 @@ const SELECT_CODE_LABEL = <Typography variant='body1'>Select Code</Typography>;
 function FDIC2(props) {
   // Hooks
   useEffect(() => {
-    if (!props.data.periodDates && !props.data.fetchingDates) {
+    if (!props.data.periodDates && !props.data.fetchingDates && !props.data.error) {
       props.handlers.fetchPeriodDates();
     }
   });
@@ -41,7 +45,9 @@ function FDIC2(props) {
     dateRange: [],
     selectedFilerId: '',
     selectedCodes: [],
-  })
+  });
+  const [ infoDialogOpen, setInfoDialogOpen ] = useState(false);
+
   console.log('state: ', state)
 
   // Handlers
@@ -135,10 +141,11 @@ function FDIC2(props) {
         <InputLabel style={{color: 'gainsboro'}}>{SELECT_FROM_PERIOD_DATE_LABEL}</InputLabel>
         <Select
           className="Select"
+          color='primary'
           onChange={handleSelectFromPeriodDate}
           value={state.fromPeriodDate}
           input={
-            <OutlinedInput name="periodDate" labelWidth={100}/>
+            <OutlinedInput id='test-id-2' name="periodDate" labelWidth={100}/>
           }
         >
           { renderOptions(props.data.periodDates) }
@@ -198,6 +205,8 @@ function FDIC2(props) {
   }
 
   function renderSelectCode() {
+    if (props.data.fetchingReports) return renderCircularProgress();
+
     const disabled = state.selectedCodes.length > 4;
 
     return state.selectedFilerId && props.data.callReportCodes ?
@@ -236,17 +245,55 @@ function FDIC2(props) {
   }
 
   function renderChart() {
-    return state.selectedCodes.length > 0 ?
+    return (
       <Chart
         data={{
           dateRange: state.dateRange,
           selectedCodes: state.selectedCodes,
           callReportData: props.data.callReportData,
         }}
-      /> : 
-      <div 
-      style={{backgroundColor: 'black', height: '800px', width: '1000px'}}
-    />;
+      /> 
+    )
+  }
+
+  function renderHelpIcon() {
+    return (
+      <HelpIcon
+        className='fdic-info-icon'
+        onClick={() => setInfoDialogOpen(true)}
+      />
+    )
+  }
+
+  function renderInfoDialog() {
+    return (
+      <Dialog open={infoDialogOpen} onClose={() => setInfoDialogOpen(false)}>
+        <DialogTitle>ABOUT FDIC TOOL</DialogTitle>
+        <div style={{padding: '20px'}}>
+          <Typography align='left' className='info-text'>
+            <b>Problem:</b> All federally insured banks must submit publicly available call report data to the fed
+            on a quarterly basis. However, these must be accessed as bulk CSVs one quarter at a time, making
+            it difficult to source data over a large span of time for analysis.
+          </Typography>
+          <Typography align='left' className='info-text'>
+            <b>Solution:</b>  Using the FDICs system of SOAP requests we can pull all FDIC filer IDs then
+            iterate requests for as many quarters of data as we would like.
+          </Typography>
+          <Typography align='left' className='info-text'>
+            <b>Purpose:</b>  This POC demonstrates the viability of quickly accessing data that should be easily 
+            available  for public consumption and analysis of institutions dependent on taxpayers.
+          </Typography>
+          <Typography align='left' className='info-text'>
+            <b>How To:</b>  Select a 'From' date (all dates are financial quarter end dates) then select a 'To' date. IDs 
+            for banks that filed call report data for that date range will be fetched.  Select a filer id, then 
+            call report data for that institution will be fetched. You can then select codes corresponding to the 
+            values for financial information filed by the selected institution (apologies, translating the codes/IDs
+            to a human readable format is a whole other project!). NPM package to leverage the endpoints for this data 
+            coming soon!
+          </Typography>
+        </div>
+      </Dialog>
+    )
   }
 
   return (
@@ -268,9 +315,8 @@ function FDIC2(props) {
         { renderChart() }
       </Grid>
       <Grid className='fdic-info' container item md={1} justifyContent='center'>
-      <div 
-          style={{backgroundColor: 'black', height: '20px', width: '20px'}}
-        />
+        {renderHelpIcon()}
+        {renderInfoDialog()}
       </Grid>
     </Grid>
   )

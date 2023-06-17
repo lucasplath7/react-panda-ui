@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Line } from 'react-chartjs-2';
 
 // Custom Modules
 import { Typography } from './../material-ui';
 
-// import './index.css';
-
 export default function Chart(props) {
+
+  const [placeHolderHidden, setPlaceholderHidden] = useState(false);
+
+  document.addEventListener('animationend', (e) => {
+    if (e.animationName === 'reveal_placeholder') {
+      setPlaceholderHidden(false);
+    }
+    if (e.animationName === 'hide_placeholder') {
+      setPlaceholderHidden(true);
+    }
+  })
   
   function renderLineChart() {
     const labels = props.data.dateRange
@@ -76,9 +85,24 @@ export default function Chart(props) {
     ) : null;
   }
 
+  function renderPlaceholder() {
+    const placeHolderClassName = props.data.selectedCodes.length === 0 ? 'reveal' : (placeHolderHidden ? 'hidden' : 'hide');
+    const gridBlock = <div className='place-block'/>;
+    const gridRow = <div className='place-row'>{ new Array(12).fill(gridBlock) }</div>;
+    const gridRows = (
+      <div className={`place-grid ${placeHolderClassName}`} id='place-grid'>
+        { new Array(12).fill(gridRow) }
+        <Typography variant='h2' className='no-data-text'>
+          NO DATA
+        </Typography>
+        </div> 
+    );
+    return gridRows;
+  }
+
   return (
       <div className="ChartContent">
-        {renderLineChart()}
+        {props.data.selectedCodes.length > 0 && placeHolderHidden ? renderLineChart() : renderPlaceholder()}
       </div>
   )
 }
