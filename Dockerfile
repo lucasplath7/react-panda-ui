@@ -6,7 +6,7 @@ RUN npm install -g cross-env
 RUN npm install
 COPY . ./
 RUN npm run build
-COPY --from=build /usr/src/app/build /usr/share/nginx/html
+COPY /usr/src/app/build /usr/share/nginx/html
 # EXPOSE 80
 # CMD ["npm", "start"]
 
