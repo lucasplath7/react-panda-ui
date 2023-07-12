@@ -4,7 +4,7 @@ services:
   nodejs:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-prod
     image: lucasplath7/react-panda-ui/react-panda-ui-deploy-image
     container_name: lucasplath7/react-panda-ui/react-panda-ui-deploy-image
     restart: unless-stopped
