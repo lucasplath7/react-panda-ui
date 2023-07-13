@@ -20,8 +20,8 @@ jobs:
       env:
         CI: true
     - name: Publish to Github Packages Registry
-
-      uses: isbang/compose-action@v1.4.1
+      - uses: actions/checkout@v1 
+      - uses: isbang/compose-action@v1.4.1
       with:
         name: lucasplath7/react-panda-ui/react-panda-ui-deploy-image
         registry: docker.pkg.github.com
