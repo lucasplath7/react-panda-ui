@@ -6,6 +6,8 @@ services:
       context: .
       dockerfile: Dockerfile-prod
     image: lucasplath7/react-panda-ui/react-panda-ui-deploy-image
+    username: ${{ secrets.MY_GITHUB_USERNAME }}
+    password: ${{ secrets.GITHUB_TOKEN }}
     container_name: lucasplath7/react-panda-ui/react-panda-ui-deploy-image
     restart: unless-stopped
     networks:
