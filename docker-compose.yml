@@ -5,11 +5,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-prod
+    ports:
+      - "80:80"
     image: lucasplath7/react-panda-ui/react-panda-ui-deploy-image
     container_name: react-panda-ui-deploy-image
     restart: unless-stopped
-    networks:
-      - app-network
+    # networks:
+    #   - app-network
 
 #   webserver:
 #     image: nginx:mainline-alpine
@@ -48,6 +50,6 @@ services:
 #       device: /root
 #       o: bind
 
-networks:
-  app-network:
-    driver: bridge  
+# networks:
+#   app-network:
+#     driver: bridge  
