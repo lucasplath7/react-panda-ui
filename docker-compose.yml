@@ -10,6 +10,7 @@ services:
     image: lucasplath7/react-panda-ui/react-panda-ui-deploy-image
     container_name: react-panda-ui-deploy-image
     restart: unless-stopped
+    command: nginx -g daemon off
     # networks:
     #   - app-network
 
