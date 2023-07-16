@@ -20,15 +20,15 @@ jobs:
       env:
         CI: true
     - name: Publish to Github Packages Registry
-      # uses: isbang/compose-action@v1.4.1
-      uses: actions/checkout@v2
+      uses: isbang/compose-action@v1.4.1
+      # uses: actions/checkout@v2
       with:
         name: lucasplath7/react-panda-ui/react-panda-ui-deploy-image
         registry: docker.pkg.github.com
         username: ${{ secrets.MY_GITHUB_USERNAME }}
         password: ${{ secrets.GITHUB_TOKEN }}
-        # compose-file: docker-compose.yml
-        run: docker-compose up -d
+        compose-file: docker-compose.yml
+        # run: docker-compose up -d
         tags: latest
     - name: Deploy package to digitalocean
       uses: appleboy/ssh-action@master
