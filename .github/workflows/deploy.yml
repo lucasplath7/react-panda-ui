@@ -6,6 +6,15 @@ on:
       - master
 
 jobs:
+  login:
+    runs-on: ubuntu-latest
+     - 
+      name: Login to GitHub Container Registry
+      uses: docker/login-action@v2
+      with:
+        registry: docker.pkg.github.com
+        username: ${{ secrets.MY_GITHUB_USERNAME }}
+        password: ${{ secrets.GITHUB_TOKEN }}
   deploy:
     runs-on: ubuntu-latest
     steps:
@@ -31,12 +40,6 @@ jobs:
     #     # compose-file: docker-compose.yml
     #     run: docker-compose.yml
     #     tags: latest
-    - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2
-        with:
-          registry: docker.pkg.github.com
-          username: ${{ secrets.MY_GITHUB_USERNAME }}
-          password: ${{ secrets.GITHUB_TOKEN }}
     - name: Publish to Github Packages Registry
       run: |
         # Build a docker container and
