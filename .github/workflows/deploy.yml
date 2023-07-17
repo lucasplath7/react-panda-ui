@@ -8,7 +8,8 @@ on:
 jobs:
   login:
     runs-on: ubuntu-latest
-     - name: testuserlogin
+     -
+      name: testuserlogin
       uses: docker/login-action@v2
       with:
         registry: docker.pkg.github.com
