@@ -52,6 +52,8 @@ jobs:
         port: ${{ secrets.DO_PORT }}
         envs: GITHUB_USERNAME, GITHUB_TOKEN
         script: |
+          echo "user $GITHUB_USERNAME"
+          echo "pw $GITHUB_TOKEN"
           docker stop $(docker ps -a -q)
           docker login docker.pkg.github.com -u $GITHUB_USERNAME -p $GITHUB_TOKEN
           docker pull docker.pkg.github.com/lucasplath7/react-panda-api/react-panda-api-deploy-image:latest
