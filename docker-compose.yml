@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile-prod
     ports:
       - "80:80"
-    image: lucasplath7/react-panda-ui/react-panda-ui-deploy-image
+    image: docker.pkg.github.com/lucasplath7/react-panda-ui/react-panda-ui-deploy-image:latest
     container_name: react-panda-ui-deploy-image
     restart: unless-stopped
     # command: npm run start

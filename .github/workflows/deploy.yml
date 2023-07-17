@@ -38,7 +38,7 @@ jobs:
         # be deployed to ECS.
         docker login docker.pkg.github.com -u "${{ secrets.MY_GITHUB_USERNAME }}" -p "${{ secrets.GITHUB_TOKEN }}"
         # docker build -f Dockerfile-prod -t docker.pkg.github.com/lucasplath7/react-panda-ui/react-panda-ui-deploy-image:latest .
-        docker-compose -f docker-compose.yml up -d .
+        docker-compose -f docker-compose.yml up -d
         docker push docker.pkg.github.com/lucasplath7/react-panda-ui/react-panda-ui-deploy-image:latest
     - name: Deploy package to digitalocean
       uses: appleboy/ssh-action@master
