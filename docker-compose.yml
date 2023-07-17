@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile-prod
     ports:
-      - "80:80"
+      - "80"
     image: lucasplath7/react-panda-ui/react-panda-ui-deploy-image
     container_name: react-panda-ui-deploy-image
     restart: unless-stopped
