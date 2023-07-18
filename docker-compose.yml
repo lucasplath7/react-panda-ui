@@ -25,7 +25,7 @@ services:
       # - certbot-var:/var/lib/letsencrypt
     depends_on:
       - reactjs
-    command: nginx -g daemon off
+    # command: nginx -g daemon off
     networks:
       - app-network
 
