@@ -62,6 +62,6 @@ jobs:
           docker run -dit -p 5000:5000 docker.pkg.github.com/lucasplath7/react-panda-api/react-panda-api-deploy-image:latest
           # docker pull docker.pkg.github.com/lucasplath7/react-panda-ui/react-panda-ui-deploy-image:latest
           # docker run -dit -p 80:80 docker.pkg.github.com/lucasplath7/react-panda-ui/react-panda-ui-deploy-image:latest
-          docker rm -f docker.pkg.github.com/lucasplath7/react-panda-ui/react-panda-ui-deploy-image:latest
+          # docker rm -f docker.pkg.github.com/lucasplath7/react-panda-ui/react-panda-ui-deploy-image:latest
           docker rm -f /react-panda-ui-deploy-image
           docker-compose -f /root/git/react-panda-ui/docker-compose.yml up -d
