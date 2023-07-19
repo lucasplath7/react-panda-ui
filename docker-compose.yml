@@ -17,7 +17,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - web-root:/var/www/html
+      - web-root:/usr/share/nginx/html
       - ./web-nginx-conf:/etc/nginx/conf.d
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
@@ -32,10 +32,10 @@ services:
     volumes:
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
-      - web-root:/var/www/html
+      - web-root:/usr/share/nginx/html
     depends_on:
       - webserver
-    command: certonly --webroot --webroot-path=/var/www/html --email lucas.plath@gmail.com --agree-tos --no-eff-email --staging -v -d www.react-panda.com -d react-panda.com
+    command: certonly --webroot --webroot-path=/usr/share/nginx/html --email lucas.plath@gmail.com --agree-tos --no-eff-email --staging -v -d www.react-panda.com -d react-panda.com
 
 volumes:
   certbot-etc:
