@@ -19,6 +19,7 @@ services:
     volumes:
       - web-root:/usr/share/nginx/html
       - ./web-nginx-conf:/etc/nginx/conf.d
+      - ./web-main-nginx-conf:/etc/nginx
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
     depends_on:
