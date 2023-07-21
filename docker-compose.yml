@@ -49,12 +49,12 @@ volumes:
       type: none
       device: /root
       o: bind
-    dhparam:
-      driver: local
-      driver_opts:
-        type: none
-        device: /root/pem/
-        o: bind
+  dhparam:
+    driver: local
+    driver_opts:
+      type: none
+      device: /root/pem/
+      o: bind
 
 networks:
   app-network:
