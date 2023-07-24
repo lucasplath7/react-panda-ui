@@ -4,7 +4,7 @@ services:
   reactjs:
     # ports:
     #   - "80:80"
-    image: docker.pkg.github.com/lucasplath7/react-panda-ui/react-panda-ui-deploy-image:1.0.0
+    image: docker.pkg.github.com/lucasplath7/react-panda-ui/react-panda-ui-deploy-image:latest
     container_name: react-panda-ui-deploy-image
     restart: unless-stopped
     networks:
