@@ -13,6 +13,7 @@ export default function Home(props) {
 
   return (
     <div class={'HomePlaceholder'}>
+      <h1 style={{color: 'white'}}>TEST</h1>
       <img 
         src={require('./panda1.jpg')}
         className='MainPicture'
