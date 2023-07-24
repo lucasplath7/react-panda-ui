@@ -27,7 +27,7 @@ jobs:
         username: ${{ secrets.MY_GITHUB_USERNAME }}
         password: ${{ secrets.GITHUB_TOKEN }}
         dockerfile: Dockerfile-prod
-        tags: latest
+        tags: '1.0.1'
         buildoptions: '--force-rm'
     # - name: Publish to Github Packages Registry
     #   run: |
