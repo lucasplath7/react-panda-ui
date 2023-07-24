@@ -14,11 +14,11 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '16.13'
-    # - name: Install npm and run unittest
-    #   run: |
-    #     npm install
-    #   env:
-    #     CI: true
+    - name: Install npm and run unittest
+      run: |
+        npm install
+      env:
+        CI: true
     - name: Publish to Github Packages Registry
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
@@ -28,15 +28,7 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
         dockerfile: Dockerfile-prod
         tags: latest
-        buildoptions: '--force-rm'
-    # - name: Publish to Github Packages Registry
-    #   run: |
-    #     # Build a docker container and
-    #     # push it to ECR so that it can
-    #     # be deployed to ECS.
-    #     docker login docker.pkg.github.com -u "${{ secrets.MY_GITHUB_USERNAME }}" -p "${{ secrets.GITHUB_TOKEN }}"
-    #     docker build -f Dockerfile-prod -t docker.pkg.github.com/lucasplath7/react-panda-ui/react-panda-ui-deploy-image:latest .
-    #     docker push docker.pkg.github.com/lucasplath7/react-panda-ui/react-panda-ui-deploy-image:latest
+        # buildoptions: '--force-rm'
     - name: Deploy package to digitalocean
       uses: appleboy/ssh-action@master
       env:
@@ -49,19 +41,13 @@ jobs:
         port: ${{ secrets.DO_PORT }}
         envs: GITHUB_USERNAME, GITHUB_TOKEN
         script: |
-          echo "user $GITHUB_USERNAME"
-          echo "pw $GITHUB_TOKEN"
-          echo $GITHUB_TOKEN
-          cd /root/git/react-panda-ui
-          git pull origin master
           docker stop $(docker ps -a -q)
           docker login docker.pkg.github.com -u $GITHUB_USERNAME -p $GITHUB_TOKEN
           docker pull docker.pkg.github.com/lucasplath7/react-panda-api/react-panda-api-deploy-image:latest
           docker run -dit -p 5000:5000 docker.pkg.github.com/lucasplath7/react-panda-api/react-panda-api-deploy-image:latest
-          # docker pull docker.pkg.github.com/lucasplath7/react-panda-ui/react-panda-ui-deploy-image:latest
-          # docker run -dit -p 80:80 docker.pkg.github.com/lucasplath7/react-panda-ui/react-panda-ui-deploy-image:latest
-          # docker rm -f docker.pkg.github.com/lucasplath7/react-panda-ui/react-panda-ui-deploy-image:latest
-          # docker rm -f /react-panda-ui-deploy-image
+
+          cd /root/git/react-panda-ui
+          git pull origin master
           docker-compose pull reactjs
           docker-compose -f /root/git/react-panda-ui/docker-compose.yml up -d --force-recreate --build
           docker image prune -f
