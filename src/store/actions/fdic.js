@@ -23,7 +23,7 @@ axiosRetry(axios, {
 export function fetchPeriodDates() {
   return dispatch => {
     dispatch(fetchPeriodDatesRequest());
-
+    console.log('fetching from api url at: ', apiURL)
     axios.get(apiURL + '/fdic/getReportingPeriodEndDates')
       .then(resp => {
         const dates = resp.data.map(date => {
