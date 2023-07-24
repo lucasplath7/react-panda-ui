@@ -27,7 +27,7 @@ jobs:
         username: ${{ secrets.MY_GITHUB_USERNAME }}
         password: ${{ secrets.GITHUB_TOKEN }}
         dockerfile: Dockerfile-prod
-        tags: '1.0.1'
+        tags: latest
         buildoptions: '--force-rm'
     # - name: Publish to Github Packages Registry
     #   run: |
@@ -62,5 +62,6 @@ jobs:
           # docker run -dit -p 80:80 docker.pkg.github.com/lucasplath7/react-panda-ui/react-panda-ui-deploy-image:latest
           # docker rm -f docker.pkg.github.com/lucasplath7/react-panda-ui/react-panda-ui-deploy-image:latest
           # docker rm -f /react-panda-ui-deploy-image
+          docker-compose pull reactjs
           docker-compose -f /root/git/react-panda-ui/docker-compose.yml up -d --force-recreate --build
           docker image prune -f
