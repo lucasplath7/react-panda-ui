@@ -88,10 +88,10 @@ export default function Chart(props) {
   function renderPlaceholder() {
     const placeHolderClassName = props.data.selectedCodes.length === 0 ? 'reveal' : (placeHolderHidden ? 'hidden' : 'hide');
     const gridBlock = <div className='place-block'/>;
-    const gridRow = <div className='place-row'>{ new Array(12).fill(gridBlock) }</div>;
+    const gridRow = <div className='place-row'>{ new Array(10).fill(gridBlock) }</div>;
     const gridRows = (
       <div className={`place-grid ${placeHolderClassName}`} id='place-grid'>
-        { new Array(12).fill(gridRow) }
+        { new Array(10).fill(gridRow) }
         <Typography variant='h2' className='no-data-text'>
           NO DATA
         </Typography>
