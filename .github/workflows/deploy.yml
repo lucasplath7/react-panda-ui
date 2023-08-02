@@ -34,12 +34,13 @@ jobs:
       env:
           GITHUB_USERNAME: ${{ secrets.MY_GITHUB_USERNAME }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REACT_APP_API_URL: https://www.react-panda.com:5001/api
       with:
         host: ${{ secrets.DO_HOST }}
         username: ${{ secrets.DO_USERNAME }}
         password: ${{ secrets.DO_PASSWORD }}
         port: ${{ secrets.DO_PORT }}
-        envs: GITHUB_USERNAME, GITHUB_TOKEN
+        envs: GITHUB_USERNAME, GITHUB_TOKEN, REACT_APP_API_URL
         script: |
           docker stop $(docker ps -a -q)
           docker login docker.pkg.github.com -u $GITHUB_USERNAME -p $GITHUB_TOKEN

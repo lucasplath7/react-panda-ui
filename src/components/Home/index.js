@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './index.css';
+require('dotenv').config()
 
 export default function Home(props) {
   // useEffect(() => {
@@ -10,7 +11,6 @@ export default function Home(props) {
   // };
 
   // const [ state, setState ] = useState(initialState);
-
   return (
     <div class={'HomePlaceholder'}>
       <img 

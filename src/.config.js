@@ -1,5 +1,5 @@
-console.log('PORT: ', process.env.PORT)
+console.log('API URL: ', process.env.REACT_APP_API_URL)
 module.exports = {
-    //apiURL: 'http://react-panda.com:5000/api',
-    apiURL: 'https://www.react-panda.com:5001/api',
+    //apiURL: 'http://localhost:5000/api',
+    apiURL: process.env.REACT_APP_API_URL,
 }
