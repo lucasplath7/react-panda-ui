@@ -21,11 +21,14 @@ jobs:
         CI: true
     - name: Publish to Github Packages Registry
       uses: elgohr/Publish-Docker-Github-Action@master
+      env:
+        REACT_APP_API_URL: https://www.react-panda.com:5001/api
       with:
         name: lucasplath7/react-panda-ui/react-panda-ui-deploy-image
         registry: docker.pkg.github.com
         username: ${{ secrets.MY_GITHUB_USERNAME }}
         password: ${{ secrets.GITHUB_TOKEN }}
+        buildargs: REACT_APP_API_URL
         dockerfile: Dockerfile-prod
         tags: latest
         # buildoptions: '--force-rm'
