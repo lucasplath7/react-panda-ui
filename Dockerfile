@@ -5,7 +5,7 @@ COPY package*.json ./
 RUN npm install -g cross-env
 RUN npm install
 COPY . ./
-ENV REACT_APP_API_URL https://www.react-panda.com:5001/api
+# ENV REACT_APP_API_URL https://www.react-panda.com:5001/api
 RUN npm run build
 # EXPOSE 80
 # CMD ["npm", "start"]
