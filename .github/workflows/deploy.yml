@@ -37,13 +37,12 @@ jobs:
       env:
           GITHUB_USERNAME: ${{ secrets.MY_GITHUB_USERNAME }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REACT_APP_API_URL: https://www.react-panda.com:5001/api
       with:
         host: ${{ secrets.DO_HOST }}
         username: ${{ secrets.DO_USERNAME }}
         password: ${{ secrets.DO_PASSWORD }}
         port: ${{ secrets.DO_PORT }}
-        envs: GITHUB_USERNAME, GITHUB_TOKEN, REACT_APP_API_URL
+        envs: GITHUB_USERNAME, GITHUB_TOKEN
         script: |
           docker stop $(docker ps -a -q)
           docker login docker.pkg.github.com -u $GITHUB_USERNAME -p $GITHUB_TOKEN
@@ -56,5 +55,5 @@ jobs:
           cd /root/git/react-panda-ui
           git pull origin master
           docker-compose pull reactjs
-          docker-compose -f /root/git/react-panda-ui/docker-compose.yml up -d --force-recreate --build
+          docker-compose -f /root/git/react-panda-ui/docker-compose.yml up -d --force-recreate --build --env-file=/root/env_files/.react_panda_ui_env
           docker image prune -f
