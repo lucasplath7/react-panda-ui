@@ -29,6 +29,7 @@ jobs:
         username: ${{ secrets.MY_GITHUB_USERNAME }}
         password: ${{ secrets.GITHUB_TOKEN }}
         buildargs: REACT_APP_API_URL
+        echo: "env value in action: $REACT_APP_API_URL"
         dockerfile: Dockerfile-prod
         tags: latest
         # buildoptions: '--force-rm'
