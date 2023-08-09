@@ -13,6 +13,7 @@ export default function Home(props) {
   // const [ state, setState ] = useState(initialState);
   return (
     <div class={'HomePlaceholder'}>
+      <h1>Z</h1>
       <img 
         src={require('./panda1.jpg')}
         className='MainPicture'
