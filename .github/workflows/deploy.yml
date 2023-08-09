@@ -14,22 +14,22 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '16.13'
-    - name: Install npm and run unittest
-      run: |
-        npm install
-      env:
-        CI: true
+    # - name: Install npm and run unittest
+    #   run: |
+    #     npm install
+    #   env:
+    #     CI: true
     - name: Publish to Github Packages Registry
       uses: elgohr/Publish-Docker-Github-Action@master
-      env:
-        REACT_APP_API_URL: 'https://www.react-panda.com:5001/api'
+      # env:
+      #   REACT_APP_API_URL: 'https://www.react-panda.com:5001/api'
       with:
         name: lucasplath7/react-panda-ui/react-panda-ui-deploy-image
         registry: docker.pkg.github.com
         username: ${{ secrets.MY_GITHUB_USERNAME }}
         password: ${{ secrets.GITHUB_TOKEN }}
-        buildargs: REACT_APP_API_URL
-        echo: "env value in action: $REACT_APP_API_URL"
+        # buildargs: REACT_APP_API_URL
+        # echo: "env value in action: $REACT_APP_API_URL"
         dockerfile: Dockerfile-prod
         tags: latest
         # buildoptions: '--force-rm'
