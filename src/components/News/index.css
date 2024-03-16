@@ -1,6 +1,6 @@
 .NewsPlaceholder {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-content: space-between;
@@ -25,4 +25,23 @@ h4 {
 
 .MuiSlider-markLabel {
   color: gainsboro !important;
+}
+
+.news-info-icon {
+  /* position: absolute;
+  top: 0; */
+  float: right;
+  /* padding-top: 8%; */
+  padding-top: 15px;
+  padding-right: 15px;
+  color: gainsboro;
+}
+
+.news-info-icon:hover {
+  cursor: pointer;
+}
+
+.source-info {
+  margin-left: 50px;
+  margin-right: 50px;
 }

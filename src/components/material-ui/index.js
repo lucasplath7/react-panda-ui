@@ -5,6 +5,7 @@ import {
 } from './SimpleDialog';
 import { HelpIcon } from './Icons';
 import Select from './Select';
+import Radio from './Radio';
 import {
   InputLabel,
   OutlinedInput,
@@ -27,6 +28,7 @@ export {
   MenuItem,
   MenuList,
   OutlinedInput,
+  Radio,
   Select,
   Typography,
   // Icons

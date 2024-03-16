@@ -1,5 +1,18 @@
 .App {
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.NavBar {
+  flex: 0 1 auto;
+  display: flex;
+}
+
+.Content {
+  min-height: 0 !important;
+  flex: 1 1 auto;
+  background-color: rgb(61, 59, 59);
 }
 
 .FormGroup {
@@ -18,9 +31,10 @@
 
 }
 
-.Application {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  background-color: rgb(61, 59, 59);
+
+.menu-icon {
+  align-items: flex-start !important;
+  width: 50px !important;
+  height: 50px !important;
+  cursor: pointer; 
 }

@@ -55,6 +55,9 @@ let theme = createTheme({
       primary: '#dcdcdc',
       secondary: '#dcdcdc',
     },
+    rightNews: {
+      main: 'red'
+    }
   },
   typography: {
     body1: {

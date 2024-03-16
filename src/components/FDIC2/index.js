@@ -232,14 +232,24 @@ function FDIC2(props) {
       </div> : null;
   }
 
-  function renderCodeChip(code) {
-    return <Chip className='code-chip' color='primary' label={code} onDelete={() => handleDeleteCodeChip(code)} />
+  function renderCodeChip(code, color) {
+    return <Chip
+      className='code-chip' 
+      label={code}
+      onDelete={() => handleDeleteCodeChip(code)}
+      style={{
+        backgroundColor: color,
+        // color
+      }}
+    />
   }
 
   function renderCodeChips() {
+    const colors = ['#26CE1E','#BD4FFC','#FCBD4F','#4FC2FC','#FC4F6C']
+
     return (
       <div className='code-chips'>
-        { state.selectedCodes.map(code => renderCodeChip(code))}
+        { state.selectedCodes.map((code, index) => renderCodeChip(code, colors[index]))}
       </div>
     )
   }
@@ -290,6 +300,12 @@ function FDIC2(props) {
             values for financial information filed by the selected institution (apologies, translating the codes/IDs
             to a human readable format is a whole other project!). NPM package to leverage the endpoints for this data 
             coming soon!
+          </Typography>
+          <Typography align='left' className='info-text'>
+            <b>NPM Package: </b>
+            <a href='https://www.npmjs.com/package/fdic-call-report-api' target='_blank'>
+              fdic-call-report-api
+            </a>
           </Typography>
         </div>
       </Dialog>
