@@ -1,11 +1,14 @@
 import CircularProgress from './CircularProgress';
+import Select from './Select';
+import Radio from './Radio';
+import Typography from './Typography';
 import {
   Dialog,
   DialogTitle,
 } from './SimpleDialog';
-import { HelpIcon } from './Icons';
-import Select from './Select';
-import Radio from './Radio';
+import {
+  HelpIcon
+} from './Icons';
 import {
   InputLabel,
   OutlinedInput,
@@ -15,7 +18,6 @@ import {
   MenuItem,
   MenuList,
 } from './Menu';
-import Typography from './Typography';
 
 import theme from './theme.js';
 
@@ -33,6 +35,6 @@ export {
   Typography,
   // Icons
   HelpIcon,
-  // Style
+  // Styles
   theme,
 }

@@ -1,39 +1,40 @@
+// NPM Packages
 import React, { useState } from 'react';
 import { Line } from 'react-chartjs-2';
 
-
-// import './index.css';
+// Custom Modules
+import { Typography } from './../material-ui';
 
 export default function Chart(props) {
+  // Hooks
+  const [placeHolderHidden, setPlaceholderHidden] = useState(false);
 
-  // useEffect(() => {
-   
-  // })
-
-  // const [ state, setState ] = useState(initialState);
-
+  document.addEventListener('animationend', (e) => {
+    if (e.animationName === 'reveal_placeholder') {
+      setPlaceholderHidden(false);
+    }
+    if (e.animationName === 'hide_placeholder') {
+      setPlaceholderHidden(true);
+    }
+  });
+  
+  // Renderers
   function renderLineChart() {
-    //const selectedCodes = [props.selectedCodeOne, props.selectedCodeTwo, props.selectedCodeThree].filter(value => value);
-    const selectedCodes = props.data.selectedCodes
-    //const range = props.threeYearRange;
-    const range = props.data.dateRange
-    const labels = range.map(date => date.id).sort((a, b) => new Date(a) - new Date(b));
-    console.log('labels: ', labels);
+    const labels = props.data.dateRange
+      .map(date => date.id)
+      .sort((a, b) => new Date(a) - new Date(b))
     const colors = ['#26CE1E','#BD4FFC','#FCBD4F','#4FC2FC','#FC4F6C']
-
-    const dataSets = selectedCodes.map((code, index) => {
+    const dataSets = props.data.selectedCodes.map((code, index) => {
       const points = labels.map((date) => {
-        console.log('date: ', date)
-        return {x: date.id, y: props.callReportData[date][code]};
-      })
+        return {x: date, y: +props.data.callReportData[date][code]};
+      });
       return {
         data: points,
         fill: false,
         label: code,
         borderColor: colors[index]
-      }
-    })
-
+      };
+    });
     const options = {
       legend: {
         labels: {
@@ -45,19 +46,29 @@ export default function Chart(props) {
           ticks: {
             fontColor: 'gainsboro'
           },
+          gridLines: {
+            color: '#717171',
+            tickMarkLength: 10,
+            lineWidth: .5,
+          }
         }],
-      xAxes: [{
-        ticks: {
-          fontColor: 'gainsboro'
-        },
-      }]
-    } 
-    }
+        xAxes: [{
+          ticks: {
+            fontColor: 'gainsboro'
+          },
+          gridLines: {
+            color: '#717171',
+            tickMarkLength: 10,
+            lineWidth: .5,
+          }
+        }],
+      }, 
+    };
 
-    return selectedCodes.length > 10 ? (
+    return props.data.selectedCodes.length > 0 ? (
       <Line 
-        color={'white'}
-        className="Chart"
+        color='red'
+        className='Chart'
 				width={200}
 				height={150}
         data={{
@@ -65,14 +76,28 @@ export default function Chart(props) {
           datasets: dataSets
         }}
         options={options}
-        style={{color: 'white'}}
 			/>
     ) : null;
   }
 
+  function renderPlaceholder() {
+    const placeHolderClassName = props.data.selectedCodes.length === 0 ? 'reveal' : (placeHolderHidden ? 'hidden' : 'hide');
+    const gridBlock = <div className='place-block'/>;
+    const gridRow = <div className='place-row'>{ new Array(10).fill(gridBlock) }</div>;
+    const gridRows = (
+      <div className={`place-grid ${placeHolderClassName}`} id='place-grid'>
+        { new Array(10).fill(gridRow) }
+        <Typography variant='h2' className='no-data-text'>
+          NO DATA
+        </Typography>
+      </div> 
+    );
+    return gridRows;
+  }
+
   return (
-      <div className="ChartContent">
-        {renderLineChart()}
+      <div className='ChartContent'>
+        {props.data.selectedCodes.length > 0 && placeHolderHidden ? renderLineChart() : renderPlaceholder()}
       </div>
-  )
+  );
 }

@@ -8,7 +8,7 @@ import MUICircularProgress from '@mui/material/CircularProgress';
 import './index.css';
 
 function CircularProgress(props) {
-  return <MUICircularProgress className='CircularProgress' { ...props } />
+  return <MUICircularProgress className='CircularProgress' { ...props } />;
 }
 
 export default CircularProgress;

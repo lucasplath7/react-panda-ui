@@ -1,7 +1,7 @@
+// NPM Packages
 import { connect } from 'react-redux';
 
 import App from './../components/App';
-import actions from './../store/actions';
 
 export function mapStateToProps(state) {
   return {

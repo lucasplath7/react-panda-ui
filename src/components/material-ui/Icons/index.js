@@ -4,8 +4,6 @@ import React from 'react';
 // Material UI
 import MUIHelpOutlineIcon from '@material-ui/icons/HelpOutline';
 
-
-
 // Styles
 import './index.css';
 

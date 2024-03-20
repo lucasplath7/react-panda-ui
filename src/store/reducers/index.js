@@ -6,4 +6,4 @@ import news from './news';
 export default combineReducers({
   fdic,
   news,
-})
+});

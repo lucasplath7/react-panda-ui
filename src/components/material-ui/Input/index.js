@@ -13,11 +13,11 @@ function InputLabel(props) {
     <MUIInputLabel className='InputLabel' { ...props }>
       {/* { ...props.children } */}
     </MUIInputLabel>
-  )
+  );
 }
 
 function OutlinedInput(props) {
-  return <MUIOutlinedInput className='OutlinedInput' { ...props } />
+  return <MUIOutlinedInput className='OutlinedInput' { ...props } />;
 }
 
 export {

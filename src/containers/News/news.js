@@ -1,5 +1,7 @@
+// NPM Packages
 import { connect } from 'react-redux';
 
+// Custom Modules
 import News from '../../components/News';
 import actions from '../../store/actions';
 

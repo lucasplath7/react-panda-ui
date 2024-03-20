@@ -1,9 +1,16 @@
+// NPM Packages
 import { connect } from 'react-redux';
 
+// Custom Modules
 import FDIC from '../../components/FDIC';
 import actions from '../../store/actions';
 
 export function mapStateToProps(state) {
+  const callReportCodesArray = state.fdic.callReportData && Object.keys(state.fdic.callReportData).map((key) => {
+    return Object.keys(state.fdic.callReportData[key])
+  });
+  const callReportCodes = callReportCodesArray ? new Set(callReportCodesArray.flat()) : null;
+  
   return {
     data: {
       error: state.fdic.error,
@@ -16,21 +23,7 @@ export function mapStateToProps(state) {
       filers: state.fdic.filers,
       selectedFilerId: state.fdic.selectedFilerId,
       callReportData: state.fdic.callReportData,
-      allowableCodes: state.fdic.callReportData && Object.keys(state.fdic.callReportData[state.fdic.threeYearRange[0].id]).map(fieldKey => {
-        let existsForAllDates = true;
-        let isNumber = false;
-        let containsNonZero = false;
-        let inRange = true;
-        state.fdic.threeYearRange.forEach(year => {
-          if (!Object.keys(state.fdic.callReportData[year.id]).includes(fieldKey)) existsForAllDates = false;
-          if (!isNaN(state.fdic.callReportData[year.id][fieldKey])) {
-            isNumber = true;
-            if (parseInt(state.fdic.callReportData[year.id][fieldKey])) containsNonZero = true;
-          }
-          if (state.fdic.callReportData[year.id][fieldKey] < -20000 || state.fdic.callReportData[year.id][fieldKey] > 20000) inRange = false;
-        });
-        if (existsForAllDates && isNumber && containsNonZero && inRange) return fieldKey;
-      }).filter(value => value)
+      callReportCodes: callReportCodes && [...callReportCodes]
     },
   };
 };

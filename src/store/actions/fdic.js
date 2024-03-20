@@ -23,7 +23,7 @@ axiosRetry(axios, {
 export function fetchPeriodDates() {
   return dispatch => {
     dispatch(fetchPeriodDatesRequest());
-    console.log('fetching from api url at: ', apiURL)
+    console.log('fetching from api url at: ', apiURL);
     axios.get(apiURL + '/fdic/getReportingPeriodEndDates')
       .then(resp => {
         const dates = resp.data.map(date => {
@@ -67,11 +67,11 @@ export function fetchFilers(from, to) {
 
     axios.get(apiURL + `/fdic/getFedIds?fromPeriodDate=${from}&&toPeriodDate=${to}`)
       .then(resp => {
-        const limitIds = resp.data.slice(1,100);
-        const filerIds = limitIds.map(filer => {
+        const limitedIds = resp.data.slice(1000);
+        const filerIds = limitedIds.map(filerId => {
           return {
-            id: filer,
-            label: filer,
+            id: filerId,
+            label: filerId,
           }
         })
         return dispatch(fetchFilersSuccess(filerIds));
@@ -115,8 +115,7 @@ export function fetchCallReports(fedId, dates) {
       .catch(error => {
         return dispatch(fetchCallReportsFailure(error.message));
       });
-    })).then(() => dispatch(fetchCallReportsSuccess(callReportData)))
-
+    })).then(() => dispatch(fetchCallReportsSuccess(callReportData)));
   }
 }
 

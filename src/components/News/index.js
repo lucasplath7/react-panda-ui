@@ -1,20 +1,21 @@
+// NPM Packages
 import React, { useEffect, useState } from 'react';
+import SpeedRead from 'speed-read-v1';
+
+// TODO move out all mui
 import {
   Button,
   CircularProgress,
   InputLabel,
   Slider,
 } from '@material-ui/core';
-import SpeedRead from 'speed-read-v1';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import IconButton from '@mui/material/IconButton';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import RadioGroup from '@mui/material/RadioGroup';
 
-// import ReactSpritz from './react-spritz-custom';
-
-import './index.css';
+// Custom Modules
 import {
   Typography,
   Radio,
@@ -22,8 +23,11 @@ import {
   DialogTitle,
   HelpIcon,
 } from '../material-ui';
-// import 'react-spritz/build/main.css';
 
+// Styles
+import './index.css';
+
+// Constants
 const MARKS = [
   {
     value: 0,
@@ -45,6 +49,7 @@ const NEWS_CATEGORIES = {
 }
 
 export default function News(props) {
+  // Hooks
   const [isMobile, setIsMobile] = useState(window.innerWidth < 600);
 
   useEffect(() => {
@@ -72,6 +77,7 @@ export default function News(props) {
   const [ wpm, setWPM] = useState(450);
   const [ infoDialogOpen, setInfoDialogOpen ] = useState(false);
 
+  // Handlers
   function handleClickPlay(event) {
     setState({
       ...state,
@@ -98,8 +104,7 @@ export default function News(props) {
     setWPM(wpm + 50);
   }
 
-  function handleChange(event, value) {
-    console.log('value: ', value)    
+  function handleChange(event, value) {  
     setState({
       ...state,
       index: 0,
@@ -107,6 +112,7 @@ export default function News(props) {
     })
   }
 
+  // Renderers
   function renderSlider() {
     return (
       <Slider
@@ -160,7 +166,6 @@ export default function News(props) {
             way to get an idea of the actual facts in major stories is to synthesize what is
             reported from a broad spectrum and filter out the factual information from the
             textbook logical fallacies.
-            <b>NPM Package:</b>
           </Typography>
           <Typography align='left' className='info-text'>
             <b>NPM Package:</b>{' '}
@@ -243,5 +248,5 @@ export default function News(props) {
           </div>
         </div>
       </>
-  )
+  );
 }

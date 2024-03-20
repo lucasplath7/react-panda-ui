@@ -1,7 +1,8 @@
+// NPM Packages
 import { connect } from 'react-redux';
 
+// Custom Modules
 import Home from '../../components/Home';
-import actions from '../../store/actions';
 
 export function mapStateToProps(state) {
   return {

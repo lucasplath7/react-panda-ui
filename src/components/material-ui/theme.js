@@ -22,18 +22,6 @@ let theme = createTheme({
         }
       },
     }, 
-    // MuiOutlinedInput: {
-    //   root: {
-    //     '& $focused': {
-    //       '& $notchedOutline': {
-    //         borderColor: 'red',
-    //       },
-    //     },
-    //   },
-    //   notchedOutline: {
-    //     borderColor: 'red',
-    //   },
-    // },
   },
   palette: {
     primary: {
