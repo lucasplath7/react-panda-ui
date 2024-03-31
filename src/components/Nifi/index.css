@@ -1,0 +1,9 @@
+.nifi-frame {
+  width: 90% !important;
+  height: 90% !important;
+}
+
+iframe {
+  width: 90% !important;
+  height: 90% !important;
+}

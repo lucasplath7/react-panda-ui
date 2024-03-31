@@ -7,6 +7,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import FDIC from './../../containers/FDIC/fdic'
 import Home from './../../containers/Home/home';
 import News from './../../containers/News/news';
+import Nifi from './../Nifi';
 import NavBar from './navBar';
 
 // Styles
@@ -24,6 +25,7 @@ export default function App() {
             <Route exact path='/' component = { Home } />
             <Route exact path='/fdic' component = { FDIC } />
             <Route exact path='/news' component = { News } />
+            <Route exact path='/nifi' component = { Nifi } />
           </div> 
         </div>
       </BrowserRouter>

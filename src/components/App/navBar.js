@@ -34,6 +34,7 @@ export default function NavBar() {
           <MenuItem onClick={handleClose} component='a' href='/' >HOME</MenuItem>
           <MenuItem onClick={handleClose} component='a' href='/fdic'>FDIC</MenuItem>
           <MenuItem onClick={handleClose} component='a' href='/news'>NEWS</MenuItem>
+          <MenuItem onClick={handleClose} component='a' href='/nifi'>NIFI</MenuItem>
         </Menu>
         <Tabs
           variant='fullWidth'
@@ -42,6 +43,7 @@ export default function NavBar() {
           <Tab label='HOME' href='/' to='/'   />
           <Tab label='FDIC' href='/fdic' to='/fdic'  />
           <Tab label='NEWS' href='/news'  to='/news' />
+          <Tab label='NIFI' href='/nifi'  to='/nifi' />
         </Tabs>
       </AppBar>
     </div>
